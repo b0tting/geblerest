@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Geblerest test page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Le styles -->
+<link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../../static/debug.css" rel="stylesheet">
+    <style>
+        .boxsizingBorder {
+            width: 100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+	<div class="hidden">
+
+		<div class="httpfile">
+			<a class="close">&times;</a>
+			<div class="row show-grid">
+				<div class="span2">
+					<div class="control-group">
+						<div class="controls">
+							<input type="text" class="input-medium fakeinputname" value="">
+						</div>
+					</div>
+				</div>
+
+				<div class="span3">
+					<div class="control-group">
+						<div class="controls">
+							<input class="input-file realinputvalue" multiple type="file">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="httpparameter">
+			<a class="close">&times;</a>
+			<div class="row show-grid">
+				<div class="span2">
+					<div class="control-group">
+						<div class="controls">
+							<input type="text" class="input-medium fakeinputname" value="">
+						</div>
+					</div>
+				</div>
+
+				<div class="span3">
+					<div class="control-group">
+						<div class="controls">
+							<input type="text" class="input-xlarge realinputvalue" value="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="httpauth">
+			<a class="close">&times;</a>
+			<div class="row show-grid">
+				<div class="span2">
+					<div class="control-group">
+						<div class="controls">
+							<input type="text" class="input-medium fakeinputname" value="">
+						</div>
+					</div>
+				</div>
+
+				<div class="span3">
+					<div class="control-group">
+						<div class="controls">
+							<input type="password" class="input-xlarge realinputvalue" value="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">Geblerest test page</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a target="_blank" href="http://jeroenooms.github.io">Test page author</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row show-grid">
+			<div id="leftcolumn" class="span6">
+				<form id="paramform" class="well" target="outputframe">
+					<fieldset>
+						<legend>HTTP request options</legend>
+
+						<br />
+
+
+						<div class="row show-grid">
+							<div class="span1">
+								<div class="control-group">
+									<label class="control-label" for="httpmethod">Method</label>
+									<div class="controls">
+										<select class="input-small" id="httpmethod">
+											<option>GET</option>
+											<option>POST</option>
+  											<option>OPTIONS</option>
+											<option>PUT</option>
+											<option>DELETE</option>
+											<option>HEAD</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="span4">
+								<div class="control-group">
+									<label class="control-label" for="urlvalue">Endpoint</label>
+									<div class="controls">
+										<input type="text" class="input-xlarge" id="urlvalue"
+											value="https://httpbin.org/get">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<p class="help-block">Method and Endpoint are required. Click
+							below to add additional parameters.</p>
+
+						<div id="allparameters">
+
+							<div class="row show-grid">
+								<div class="span2">
+									<div class="control-group">
+										<label class="control-label">Parameter Name</label>
+									</div>
+								</div>
+
+								<div class="span3">
+									<div class="control-group">
+										<label class="control-label">Parameter Value</label>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div align="left">
+							<button id="addbodybutton" class="btn btn-primary">
+								<i class="icon-plus icon-white"></i> Add example PUT body for light config
+							</button>
+						</div>
+
+						<br />
+						<div>
+                              <label for="comment">Post body:</label>
+                              <textarea class="boxsizingBorder" rows="5" id="postbody"></textarea>
+						</div>
+
+
+						<div align="right">
+							<button id="submitajax" class="btn btn-success btn-large">
+								<i class="icon-download-alt icon-white"></i> Ajax request
+							</button>
+							<img src="../../static/spinner.gif" id="ajaxspinner" />
+						</div>
+					</fieldset>
+				</form>
+
+				<div id="errordiv"></div>
+        
+  			<div class="alert alert-info">
+					<a class="close" data-dismiss="alert">&times;</a> <strong>Welcome!</strong>
+          Use this simple page to poke around at the API. Some suggestions:
+                <ul>
+                    <li>POST /lights/&lt;name&gt;/&lt;mac&gt; to add a new bulb</li>
+                    <li>GET /lights/ to get the light catalog</li>
+                    <li>GET /lights/&lt;name&gt; to get a specific light</li>
+                    <li>PUT /lights/&lt;name&gt; to configure a light (use the button for example body)</li>
+                    <li>GET /lights/&lt;name&gt;/power/&lt;on | off&gt; to just turn the light on or off</li>
+
+                </ul>
+
+
+				</div>
+
+			</div>
+
+			<div class="span6">
+				<div id="ajaxoutput">
+					<pre id="statuspre">0</pre>
+					<pre class="pre-scrollable prettyprint linenums" id="outputpre"></pre>
+					<pre class="pre-scrollable prettyprint linenums" id="headerpre"></pre>
+				</div>
+			</div>
+		</div>
+
+		<br>
+
+
+	</div>
+
+	<script src="../../static/jquery-1.10.2.min.js"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../static/debug.js"></script>
+<script language="javascript">
+    $(document).ready( function () {
+        $("#urlvalue").val(document.location)
+        $("#addbodybutton").on("click", function(e) {
+            e.preventDefault();
+            $("#postbody").val('{\n' +
+                '  "power_on": true,\n' +
+                '  "red": 255,\n' +
+                '  "green": 255,\n' +
+                '  "blue": 255,\n' +
+                '  "white": 40\n' +
+                "}")
+        })
+
+    })
+
+</script>
+  
+</body>
+</html>
